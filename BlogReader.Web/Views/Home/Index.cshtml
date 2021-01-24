@@ -10,16 +10,19 @@
 
     @foreach (var contentItem in Model.ContentItems)
     {
-        <amp-story-page id="cover">
+        <amp-story-page>
 
-            <amp-story-grid-layer template="fill">
+            <amp-story-grid-layer template="vertical">
                 <amp-img src="@contentItem.ImageLink"
                          layout="responsive">
                 </amp-img>
                 <amp-story-grid-layer template="thirds">
-
-                    <h1 grid-area="upper-third">@contentItem.Title</h1>
-                    <p grid-area="lower-third" animate-in="drop">
+                    <h2 grid-area="upper-third">@contentItem.Title</h2>
+                    <div grid-area="middle-third">
+                        <img src="@contentItem.ImageLink"
+                             whoosh-in-right="1000" />
+                    </div>
+                    <p grid-area="lower-third">
                         @Html.Raw(contentItem.SummaryTextWithNoImages)
                     </p>
 

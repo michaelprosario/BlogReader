@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text.RegularExpressions;
 
 namespace BlogReader.Core.Entities
 {
@@ -20,14 +19,6 @@ namespace BlogReader.Core.Entities
         public string SummaryText { get; set; } = "";
         public string? Content { get; set; }
         public string ImageLink { get; set; } = "";
-
-        public string SummaryTextWithNoImages
-        {
-            get
-            {
-                var content = Regex.Replace(SummaryText, @"<img>(.*?)<\/img>", "$1");
-                return content;
-            }
-        }
+        public string SummaryTextWithNoImages { get; set; } = "";
     }
 }

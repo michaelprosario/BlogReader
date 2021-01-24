@@ -26,6 +26,15 @@ namespace BlogReader.Infrastructure
                 response.ContentItems.Add(contentItem);
             }
 
+            foreach (var contentItem in response.ContentItems)
+            {
+                var doc = new HtmlDocument();
+                doc.LoadHtml(contentItem.SummaryText);
+                var imageNodes = doc.DocumentNode.SelectNodes("//img");
+                foreach (var imageNode in imageNodes) imageNode.ParentNode.RemoveChild(imageNode);
+                contentItem.SummaryTextWithNoImages = doc.DocumentNode.OuterHtml;
+            }
+
             response.Link = command.Url;
 
             return response;
@@ -35,7 +44,7 @@ namespace BlogReader.Infrastructure
         {
             Guard.Against.Null(contentItem, nameof(contentItem));
 
-            var content = "";
+            string content;
             if (!string.IsNullOrEmpty(contentItem.Content))
                 content = contentItem.Content;
             else if (!string.IsNullOrEmpty(contentItem.SummaryText))

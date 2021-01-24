@@ -56,6 +56,24 @@ namespace BlogReader.Integration.Tests
         }
 
         [Test]
+        public void Service__RssFeedContent__MichaelHyattNoImagesInSummaryText()
+        {
+            // arrange
+            var command = new GetRssFeedContentCommand
+            {
+                Url = "https://michaelhyatt.com/feed/"
+            };
+
+            // act
+            var response = _service.GetRssFeedContent(command);
+
+            // assert 
+            foreach (var item in response.ContentItems)
+                Assert.IsTrue(item.SummaryTextWithNoImages.IndexOf("<img") == -1);
+        }
+
+
+        [Test]
         public void Service__RssFeedContent__MyBlog()
         {
             // arrange
