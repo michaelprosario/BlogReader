@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <DockerfileContext>..\..\BlogReader.Core</DockerfileContext>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BlogReader.Core\BlogReader.Core.csproj" />
+    <ProjectReference Include="..\BlogReader.Infrastructure\BlogReader.Infrastructure.csproj" />
+  </ItemGroup>
+
+</Project>

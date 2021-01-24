@@ -1,0 +1,31 @@
+﻿@model BlogReader.Core.Services.GetRssFeedContentResponse
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div>
+    <li>
+        Title: @Model.Title
+    </li>
+    <li>
+        Link: @Model.Link
+    </li>
+    @foreach (var contentItem in Model.ContentItems)
+    {
+        <div class="divPost">
+            <h1>
+                <a href="@contentItem.Link"> @contentItem.Title </a>
+            </h1>
+            <p>
+                Post date: @contentItem.CreationDate
+            </p>
+            <p>
+                <img src="@contentItem.ImageLink" alt="@contentItem.Title"/>
+            </p>
+            <div>
+                @Html.Raw(contentItem.SummaryText)
+            </div>
+            <hr/>
+        </div>
+    }
+</div>
