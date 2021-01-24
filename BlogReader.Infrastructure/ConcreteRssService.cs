@@ -37,18 +37,12 @@ namespace BlogReader.Infrastructure
 
             var content = "";
             if (!string.IsNullOrEmpty(contentItem.Content))
-            {
                 content = contentItem.Content;
-            }
             else if (!string.IsNullOrEmpty(contentItem.SummaryText))
-            {
                 content = contentItem.SummaryText;
-            }
             else
-            {
                 return "";
-            }
-           
+
             var doc = new HtmlDocument();
             doc.LoadHtml(content);
             var firstImageNode = doc.DocumentNode.SelectSingleNode("//img");
@@ -80,10 +74,7 @@ namespace BlogReader.Infrastructure
                     contentItemsFound++;
                 }
 
-            if (contentItemsFound == 0)
-            {
-                contentItem.Content = "";
-            }
+            if (contentItemsFound == 0) contentItem.Content = "";
 
             if (contentItemsFound > 1) Console.WriteLine("Interesting: found more than one content on feed item");
 

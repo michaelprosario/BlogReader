@@ -2,30 +2,30 @@
 @{
     ViewData["Title"] = "Home Page";
 }
+<amp-story standalone
+           title="@Model.Title"
+           publisher="Test Publisher"
+           publisher-logo-src="/images/logo.svg"
+           poster-portrait-source="/images/cover.png">
 
-<div>
-    <li>
-        Title: @Model.Title
-    </li>
-    <li>
-        Link: @Model.Link
-    </li>
     @foreach (var contentItem in Model.ContentItems)
     {
-        <div class="divPost">
-            <h1>
-                <a href="@contentItem.Link"> @contentItem.Title </a>
-            </h1>
-            <p>
-                Post date: @contentItem.CreationDate
-            </p>
-            <p>
-                <img src="@contentItem.ImageLink" alt="@contentItem.Title"/>
-            </p>
-            <div>
-                @Html.Raw(contentItem.SummaryText)
-            </div>
-            <hr/>
-        </div>
+        <amp-story-page id="cover">
+
+            <amp-story-grid-layer template="fill">
+                <amp-img src="@contentItem.ImageLink"
+                         layout="responsive">
+                </amp-img>
+                <amp-story-grid-layer template="thirds">
+
+                    <h1 grid-area="upper-third">@contentItem.Title</h1>
+                    <p grid-area="lower-third" animate-in="drop">
+                        @Html.Raw(contentItem.SummaryTextWithNoImages)
+                    </p>
+
+                </amp-story-grid-layer>
+            </amp-story-grid-layer>
+
+        </amp-story-page>
     }
-</div>
+</amp-story>
